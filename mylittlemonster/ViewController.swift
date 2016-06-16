@@ -12,13 +12,24 @@ import AVFoundation
 class ViewController: UIViewController {
     
     
-    @IBOutlet weak var monsterImg: MonsterImg!
+
+    @IBOutlet weak var golemImg: GolemImg!
+    @IBOutlet weak var kidGolemImg: KidGolemImg!
     @IBOutlet weak var heartImg: DragImg!
     @IBOutlet weak var foodImg: DragImg!
     @IBOutlet weak var penalty1Img: UIImageView!
     @IBOutlet weak var penalty2Img: UIImageView!
     @IBOutlet weak var penalty3Img: UIImageView!
+    @IBOutlet weak var restartBttn: UIButton!
+    @IBOutlet weak var livesPanel: UIImageView!
+    @IBOutlet weak var characterSelectionLbl: UILabel!
+    @IBOutlet weak var characterSelectionView: UIStackView!
+    @IBOutlet weak var skullStackView: UIStackView!
     
+    
+    var monsterImgSelected: MonsterImg!
+    
+  
     
     let DIM_ALPHA: CGFloat = 0.2
     let OPAQUE_ALPHA: CGFloat = 1.0
@@ -35,18 +46,15 @@ class ViewController: UIViewController {
     var sfxHeart: AVAudioPlayer!
     var sfxSkull: AVAudioPlayer!
     var sfxDeath: AVAudioPlayer!
+    
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        foodImg.dropTarget = monsterImg
-        heartImg.dropTarget = monsterImg
         
-        penalty1Img.alpha = DIM_ALPHA
-        penalty2Img.alpha = DIM_ALPHA
-        penalty3Img.alpha = DIM_ALPHA
         
-        startTimer()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ViewController.itemDroppedOnCharacter(_:)), name: "onTargetDropped", object: nil)
         
@@ -140,8 +148,12 @@ class ViewController: UIViewController {
     
     func gameOver() {
         timer.invalidate()
-        monsterImg.playDeadAnimation()
+        monsterImgSelected.playDeadAnimation()
         sfxDeath.play()
+        heartImg.hidden = true
+        foodImg.hidden = true
+        
+        restartBttn.hidden = false
     }
     
     
@@ -165,6 +177,88 @@ class ViewController: UIViewController {
     
     
 
+    @IBAction func restartBttnPrssed(sender: AnyObject) {
+        
+        restartBttn.hidden = true
+        monsterImgSelected.playIdleAnimation()
+        currentPenalties = 0
+        penalty1Img.alpha = DIM_ALPHA
+        penalty2Img.alpha = DIM_ALPHA
+        penalty3Img.alpha = DIM_ALPHA
+        heartImg.hidden = false
+        foodImg.hidden = false
+        
+        startTimer()
+        
+        
+        
+    }
+    
+    
+    
+    func startGame() {
+        
+        characterSelectionView.hidden = true
+        characterSelectionLbl.hidden = true
+        
+        livesPanel.hidden = false
+//        penalty1Img.hidden = false
+//        penalty2Img.hidden = false
+//        penalty3Img.hidden = false
+        skullStackView.hidden = false
+        
+        penalty1Img.alpha = DIM_ALPHA
+        penalty2Img.alpha = DIM_ALPHA
+        penalty3Img.alpha = DIM_ALPHA
+        
+
+        heartImg.hidden = false
+        foodImg.hidden = false
+        
+        monsterImgSelected.hidden = false
+        
+        
+
+        
+    }
+    
+    
+    @IBAction func golemSelected(sender: AnyObject) {
+        startTimer()
+
+        golemImg.hidden = false
+        kidGolemImg.hidden = true
+        monsterImgSelected = golemImg
+        
+        loadMonsterImg(golemImg)
+        
+        startGame()
+        
+    }
+    
+    
+    
+    @IBAction func kidGolemSelected(sender: AnyObject) {
+        startTimer()
+        
+        kidGolemImg.hidden = false
+        golemImg.hidden = true
+
+        
+        loadMonsterImg(kidGolemImg)
+        
+        startGame()
+        
+    }
+    
+    
+    func loadMonsterImg(monsterImg: MonsterImg) {
+        monsterImgSelected = monsterImg
+        foodImg.dropTarget = monsterImg
+        heartImg.dropTarget = monsterImg
+        monsterImg.playIdleAnimation()
+    }
+    
     
 
 }
