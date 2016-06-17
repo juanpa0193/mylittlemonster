@@ -211,7 +211,7 @@
                                     </mask>
                                 </variation>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" spacing="80" translatesAutoresizingMaskIntoConstraints="NO" id="He9-Nn-byp">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="He9-Nn-byp">
                                 <rect key="frame" x="180" y="117" width="0.0" height="0.0"/>
                                 <subviews>
                                     <imageView hidden="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="heart" translatesAutoresizingMaskIntoConstraints="NO" id="cFa-0M-Unc" customClass="DragImg" customModule="mylittlemonster" customModuleProvider="target">
@@ -225,6 +225,16 @@
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                             <rect key="frame" x="-200" y="-119" width="0.0" height="80"/>
+                                        </variation>
+                                    </imageView>
+                                    <imageView hidden="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="fruit" translatesAutoresizingMaskIntoConstraints="NO" id="mGL-2Y-TH4" customClass="DragImg" customModule="mylittlemonster" customModuleProvider="target">
+                                        <rect key="frame" x="-300" y="-119" width="0.0" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="GF6-pf-uXU"/>
+                                            <constraint firstAttribute="height" constant="80" id="OAb-Oh-hYa"/>
+                                        </constraints>
+                                        <variation key="heightClass=compact" ambiguous="YES">
+                                            <rect key="frame" x="-560" y="-15" width="80" height="0.0"/>
                                         </variation>
                                     </imageView>
                                     <imageView hidden="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="food" translatesAutoresizingMaskIntoConstraints="NO" id="8PN-LL-KZP" customClass="DragImg" customModule="mylittlemonster" customModuleProvider="target">
@@ -244,7 +254,7 @@
                                         </variation>
                                     </imageView>
                                 </subviews>
-                                <variation key="heightClass=compact" axis="vertical" ambiguous="YES" misplaced="YES" spacing="30">
+                                <variation key="heightClass=compact" axis="vertical" ambiguous="YES" misplaced="YES" spacing="20">
                                     <rect key="frame" x="500" y="28" width="0.0" height="0.0"/>
                                 </variation>
                                 <variation key="heightClass=compact-widthClass=regular" misplaced="YES">
@@ -327,10 +337,13 @@
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="background" destination="mIb-G0-Ced" id="Hsd-va-gVx"/>
                         <outlet property="characterSelectionLbl" destination="gNI-c0-H32" id="0SQ-HS-ZLq"/>
                         <outlet property="characterSelectionView" destination="II1-fG-fGK" id="qp6-LS-vcQ"/>
                         <outlet property="foodImg" destination="8PN-LL-KZP" id="e2U-dI-NsD"/>
+                        <outlet property="fruitImg" destination="mGL-2Y-TH4" id="RBk-vz-09x"/>
                         <outlet property="golemImg" destination="hps-G8-5YF" id="GGx-zN-Hgh"/>
+                        <outlet property="ground" destination="JhC-8f-HkF" id="Hbx-Zg-MLw"/>
                         <outlet property="heartImg" destination="cFa-0M-Unc" id="pXj-m2-BWk"/>
                         <outlet property="kidGolemImg" destination="4j6-ee-PmI" id="kNm-NA-GhL"/>
                         <outlet property="livesPanel" destination="Myc-YI-8bf" id="1nA-s5-ymb"/>
@@ -350,6 +363,7 @@
         <image name="RESTART" width="362" height="80"/>
         <image name="bg" width="768" height="1024"/>
         <image name="food" width="95" height="98"/>
+        <image name="fruit" width="36" height="43"/>
         <image name="ground" width="1444" height="151"/>
         <image name="heart" width="95" height="98"/>
         <image name="idle1" width="889" height="615"/>

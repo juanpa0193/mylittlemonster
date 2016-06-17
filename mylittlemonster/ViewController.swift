@@ -13,10 +13,13 @@ class ViewController: UIViewController {
     
     
 
+    @IBOutlet weak var background: UIImageView!
+    @IBOutlet weak var ground: UIImageView!
     @IBOutlet weak var golemImg: GolemImg!
     @IBOutlet weak var kidGolemImg: KidGolemImg!
     @IBOutlet weak var heartImg: DragImg!
     @IBOutlet weak var foodImg: DragImg!
+    @IBOutlet weak var fruitImg: DragImg!
     @IBOutlet weak var penalty1Img: UIImageView!
     @IBOutlet weak var penalty2Img: UIImageView!
     @IBOutlet weak var penalty3Img: UIImageView!
@@ -123,20 +126,32 @@ class ViewController: UIViewController {
         }
         }
         
-        let rand = arc4random_uniform(2) // 0 or 1
+        let rand = arc4random_uniform(3) // 0 or 1 or 2
         
         if rand == 0 {
             foodImg.alpha = DIM_ALPHA
             foodImg.userInteractionEnabled = false
+            fruitImg.alpha = DIM_ALPHA
+            fruitImg.userInteractionEnabled = false
             
             heartImg.alpha = OPAQUE_ALPHA
             heartImg.userInteractionEnabled = true
         } else if rand == 1 {
             heartImg.alpha = DIM_ALPHA
             heartImg.userInteractionEnabled = false
+            fruitImg.alpha = DIM_ALPHA
+            fruitImg.userInteractionEnabled = false
             
             foodImg.alpha = OPAQUE_ALPHA
             foodImg.userInteractionEnabled = true
+        } else if rand == 2 {
+            foodImg.alpha = DIM_ALPHA
+            foodImg.userInteractionEnabled = false
+            heartImg.alpha = DIM_ALPHA
+            heartImg.userInteractionEnabled = false
+            
+            fruitImg.alpha = OPAQUE_ALPHA
+            fruitImg.userInteractionEnabled = true
         }
         
         currentItem = rand
@@ -152,6 +167,7 @@ class ViewController: UIViewController {
         sfxDeath.play()
         heartImg.hidden = true
         foodImg.hidden = true
+        fruitImg.hidden = true
         
         restartBttn.hidden = false
     }
@@ -165,6 +181,8 @@ class ViewController: UIViewController {
         foodImg.userInteractionEnabled = false
         heartImg.alpha = DIM_ALPHA
         heartImg.userInteractionEnabled = false
+        fruitImg.alpha = DIM_ALPHA
+        fruitImg.userInteractionEnabled = false
         
         
         if currentItem == 0 {
@@ -187,6 +205,7 @@ class ViewController: UIViewController {
         penalty3Img.alpha = DIM_ALPHA
         heartImg.hidden = false
         foodImg.hidden = false
+        fruitImg.hidden = false
         
         startTimer()
         
@@ -202,9 +221,7 @@ class ViewController: UIViewController {
         characterSelectionLbl.hidden = true
         
         livesPanel.hidden = false
-//        penalty1Img.hidden = false
-//        penalty2Img.hidden = false
-//        penalty3Img.hidden = false
+
         skullStackView.hidden = false
         
         penalty1Img.alpha = DIM_ALPHA
@@ -214,6 +231,7 @@ class ViewController: UIViewController {
 
         heartImg.hidden = false
         foodImg.hidden = false
+        fruitImg.hidden = false
         
         monsterImgSelected.hidden = false
         
@@ -239,6 +257,9 @@ class ViewController: UIViewController {
     
     
     @IBAction func kidGolemSelected(sender: AnyObject) {
+        background.image = UIImage(named: "marsbg.png")
+       // ground.image = UIImage(named: "marsground.png")
+        
         startTimer()
         
         kidGolemImg.hidden = false
@@ -256,6 +277,7 @@ class ViewController: UIViewController {
         monsterImgSelected = monsterImg
         foodImg.dropTarget = monsterImg
         heartImg.dropTarget = monsterImg
+        fruitImg.dropTarget = monsterImg
         monsterImg.playIdleAnimation()
     }
     
